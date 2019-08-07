@@ -1,0 +1,2 @@
+dbus-python==1.2.8
+mpris2==1.0.2
