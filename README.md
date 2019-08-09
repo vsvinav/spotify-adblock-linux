@@ -1,5 +1,17 @@
-# spotify-adblock-linux
-1. `pip install -r requirements.txt`
-2. Run Spotify before running the script
-3. Open terminal
-4. `python blocker.py` (Keep it running)
+# spotify-adblock-linux ![Language](https://img.shields.io/github/languages/top/vsvinav/spotify-adblock-linux?style=flat)
+
+
+Installation   
+------------
+$`git clone https://github.com/vsvinav/spotify-adblock-linux.git`
+
+$`cd spotify-adblock-linux`
+
+$`pip3 install -r requirements.txt`
+
+
+Usage   
+-----
+Open Spotify before running the script
+
+$`python adspotter` (keep it running)
