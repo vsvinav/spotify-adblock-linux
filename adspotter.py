@@ -1,0 +1,70 @@
+#!/usr/bin/env python3
+__version__ = '0.0.1'
+__author__ = 'vsvinav'
+try:
+    import os
+    import sys
+    import dbus
+    import time
+    import mpris2
+    import signal
+    import getpass
+    import subprocess
+    from colorama import Fore, Style
+except:
+    print('\033[1;31m[ERROR]: \033[1;m' + 'missing requirements')
+    exit()
+
+user = getpass.getuser()
+red, green, reset, bold = Fore.RED, Fore.GREEN, Style.RESET_ALL, "\033[1;31m"
+error = '\r' + red + bold + "[ERROR]:" + reset + ' '
+status = bold + green + "[STATUS]:" + reset + ' '
+open_spotify = "setsid spotify >/dev/null"
+close_spotify = "ps -ef | grep \'spotify\' | grep -v grep | awk \'{print $2}\' | xargs -r kill -9"
+
+
+def type(text, speed, next):
+    for char in text + next:
+        sys.stdout.write(char)
+        sys.stdout.flush()
+        time.sleep(1. / speed)
+
+
+def keynterrupt():
+    type(error + 'interrupted by ' + user, 50, '\n\n')
+    exit()
+def main():
+    os.system('clear')
+    type(bold + green + r'''
+   _        _   ___                _     _
+  /_\    __| | / __|  _ __   ___  | |_  | |_   ___   _ _
+ / _ \  / _` | \__ \ | '_ \ / _ \ |  _| |  _| / -_) | '_|
+/_/ \_\ \__,_| |___/ | .__/ \___/  \__|  \__| \___| |_|
+                     |_|'''[1:] + "v" + __version__, 300,"\n\n")
+    try:
+        uri = dbus.String('org.mpris.MediaPlayer2.spotify')
+        player = mpris2.Player(dbus_interface_info={'dbus_uri': uri})
+    except:
+        type(error + "spotify isn't running", 50, '\n\n')
+        exit()
+    type(status + 'waiting for ads...', 10, '\n')
+    open_spotify = "setsid spotify &>/dev/null"
+    uri = dbus.String('org.mpris.MediaPlayer2.spotify')
+    player = mpris2.Player(dbus_interface_info={'dbus_uri': uri})
+    kill_spotify = "ps -ef | grep \'spotify\' | grep -v grep | awk \'{print $2}\' | xargs -r kill -9"
+    while True:
+        try:
+            if str(dict(player.Metadata).get(dbus.String('xesam:title'))) == 'Advertisement':
+                print(status + 'Detected Ad')
+                os.system(kill_spotify)
+                print(status + 'Blocking Ad')
+                os.system(open_spotify)
+                player.Next()
+        except:
+            time.sleep(3)
+            uri = dbus.String('org.mpris.MediaPlayer2.spotify')
+            player = mpris2.Player(dbus_interface_info={'dbus_uri': uri})
+            player.Next()
+
+if __name__ == '__main__':
+    main()
