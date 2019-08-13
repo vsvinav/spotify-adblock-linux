@@ -51,10 +51,11 @@ def main():
     open_spotify = "setsid spotify &>/dev/null"
     uri = dbus.String('org.mpris.MediaPlayer2.spotify')
     player = mpris2.Player(dbus_interface_info={'dbus_uri': uri})
+    title = str(dict(player.Metadata).get(dbus.String('xesam:title')))
     kill_spotify = "ps -ef | grep \'spotify\' | grep -v grep | awk \'{print $2}\' | xargs -r kill -9"
     while True:
         try:
-            if str(dict(player.Metadata).get(dbus.String('xesam:title'))) == 'Advertisement':
+            if title in ['Advertisement', 'Spotify', 'spotify', 'Ad']:
                 print(status + 'Detected Ad')
                 os.system(kill_spotify)
                 print(status + 'Blocking Ad')
