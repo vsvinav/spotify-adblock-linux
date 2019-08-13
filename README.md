@@ -15,3 +15,8 @@ Usage
 Open Spotify before running the script
 
 $`python adspotter` (keep it running)
+
+
+Troubleshooting
+-----
+If in case you're not able to install dbus-python, run `sudo apt-get install libdbus-1-dev libdbus-glib-1-dev` to fix. And then run $`pip3 install -r requirements.txt` again.
