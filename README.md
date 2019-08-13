@@ -14,7 +14,7 @@ Usage
 -----
 Open Spotify before running the script
 
-$`python adspotter` (keep it running)
+$`python3 adspotter` (keep it running)
 
 
 Troubleshooting
