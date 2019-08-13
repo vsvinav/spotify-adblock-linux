@@ -1,5 +1,7 @@
 # spotify-adblock-linux ![Language](https://img.shields.io/github/languages/top/vsvinav/spotify-adblock-linux?style=flat)
 
+**A Spotify adblocker for Linux**
+
 Installation   
 ------------
 ```
@@ -12,7 +14,7 @@ Usage
 -----
 Open Spotify before running the script
 
-`$ python adspotter.py` (keep it running)
+`$ python3 adspotter` (keep it running)
 
 Troubleshooting
 -----
