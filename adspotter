@@ -33,6 +33,8 @@ def type(text, speed, next):
 def keynterrupt():
     type(error + 'interrupted by ' + user, 50, '\n\n')
     exit()
+    
+    
 def main():
     os.system('clear')
     type(bold + green + r'''
@@ -54,6 +56,7 @@ def main():
     title = str(dict(player.Metadata).get(dbus.String('xesam:title')))
     kill_spotify = "ps -ef | grep \'spotify\' | grep -v grep | awk \'{print $2}\' | xargs -r kill -9"
     while True:
+        signal.signal(signal.SIGINT, lambda x, y: keynterrupt())
         try:
             if title in ['Advertisement', 'Spotify', 'spotify', 'Ad']:
                 print(status + 'Detected Ad')
