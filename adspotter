@@ -55,7 +55,7 @@ def main():
     player = mpris2.Player(dbus_interface_info={'dbus_uri': uri})
     kill_spotify = "ps -ef | grep \'spotify\' | grep -v grep | awk \'{print $2}\' | xargs -r kill -9"
     while True:
-	title = str(dict(player.Metadata).get(dbus.String('xesam:title')))
+        title = str(dict(player.Metadata).get(dbus.String('xesam:title')))
         signal.signal(signal.SIGINT, lambda x, y: keynterrupt())
         try:
             if title in ['Advertisement', 'Spotify', 'spotify', 'Ad']:
