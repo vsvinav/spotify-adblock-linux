@@ -69,6 +69,7 @@ def main():
             uri = dbus.String('org.mpris.MediaPlayer2.spotify')
             player = mpris2.Player(dbus_interface_info={'dbus_uri': uri})
             player.Next()
+        time.sleep(1)
 
 if __name__ == '__main__':
     main()
